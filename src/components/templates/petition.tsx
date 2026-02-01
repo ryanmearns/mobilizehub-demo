@@ -1,8 +1,8 @@
 'use client'
 
-import { Form } from '@/payload-types'
+import { Petition } from '@/payload-types'
 import { type Country } from '@mobilizehub/payload-plugin/helpers'
-import { submitForm } from '@mobilizehub/payload-plugin/react'
+import { signPetition } from '@mobilizehub/payload-plugin/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { Loader2 } from 'lucide-react'
 import React from 'react'
@@ -11,6 +11,7 @@ import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from '../ui/field'
 import { Input } from '../ui/input'
+import { Progress } from '../ui/progress'
 import { RichText } from '../ui/richtext'
 import {
   Select,
@@ -21,17 +22,23 @@ import {
   SelectValue,
 } from '../ui/select'
 
-export function FormTemplate({
+export function PetitionTemplate({
   id,
   headline,
   legend,
   content,
+  target,
+  ask,
+  goal,
   contactFields,
   submitButtonLabel,
   countries,
-}: Form & { countries: Country[] }) {
+  signatureCount = 0,
+}: Petition & { countries: Country[]; signatureCount?: number }) {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const formRef = React.useRef<HTMLFormElement>(null)
+
+  const progressPercentage = goal ? Math.min((signatureCount / goal) * 100, 100) : 0
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -53,8 +60,8 @@ export function FormTemplate({
 
       const formData = new FormData(e.target as HTMLFormElement)
       const data = transformCheckboxData(Object.fromEntries(formData))
-      await submitForm({
-        formId: id,
+      await signPetition({
+        petitionId: id,
         data,
         opts: {
           onRedirect: (redirect) => {
@@ -65,7 +72,7 @@ export function FormTemplate({
               toast.success(message)
               formRef.current?.reset()
             } else {
-              toast.success('Form submitted successfully')
+              toast.success('Thank you for signing!')
               formRef.current?.reset()
             }
           },
@@ -94,11 +101,35 @@ export function FormTemplate({
 
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-24">
         <div className="flex flex-col items-stretch gap-8 lg:flex-row lg:gap-24">
-          <div className="flex-1">
-            <RichText data={content as SerializedEditorState} />
+          <div className="flex-1 space-y-6">
+            {goal && (
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">{signatureCount.toLocaleString()} signatures</span>
+                  <span className="text-muted-foreground">Goal: {goal.toLocaleString()}</span>
+                </div>
+                <Progress value={progressPercentage} />
+              </div>
+            )}
+
+            {content && <RichText data={content as SerializedEditorState} />}
           </div>
 
-          <div className="h-fit flex-1 rounded-lg border p-8">
+          <div className="h-fit flex-1 space-y-8 rounded-lg border p-8">
+            <div className="space-y-4">
+              {target && (
+                <div>
+                  <p className="text-lg font-semibold">{target}</p>
+                </div>
+              )}
+
+              {ask && (
+                <div>
+                  <p className="text-lg italic">{ask}</p>
+                </div>
+              )}
+            </div>
+
             <form onSubmit={handleSubmit} ref={formRef}>
               <FieldGroup>
                 <FieldLegend className="font-bold">{legend}</FieldLegend>
@@ -249,7 +280,7 @@ export function FormTemplate({
                 <Field orientation="vertical">
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-                    {isSubmitting ? 'Submitting...' : submitButtonLabel || 'Submit'}
+                    {isSubmitting ? 'Signing...' : submitButtonLabel || 'Sign this petition'}
                   </Button>
                 </Field>
               </FieldGroup>

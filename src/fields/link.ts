@@ -26,7 +26,7 @@ export const LinkField: Field = {
     {
       name: 'page',
       type: 'relationship',
-      relationTo: ['pages', 'forms'],
+      relationTo: ['pages', 'forms', 'petitions'],
       required: true,
       label: 'Page to redirect to',
       admin: {

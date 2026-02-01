@@ -1,11 +1,11 @@
-import { Form, Page } from '@/payload-types'
+import { Form, Page, Petition } from '@/payload-types'
 import config from '@payload-config'
 import { CollectionSlug, getPayload } from 'payload'
 
 export async function getDocument(slug: string) {
   const payload = await getPayload({ config })
 
-  const COLLECTIONS: Array<CollectionSlug> = ['pages', 'forms']
+  const COLLECTIONS: Array<CollectionSlug> = ['pages', 'forms', 'petitions']
 
   for (const collection of COLLECTIONS) {
     const { docs } = await payload.find({
@@ -34,6 +34,23 @@ export async function getDocument(slug: string) {
           success: true,
           collection,
           doc: form,
+        }
+      }
+
+      if (collection === 'petitions') {
+        const petition = docs[0] as Petition
+
+        const { totalDocs } = await payload.count({
+          collection: 'petitionSignatures',
+          where: {
+            petition: { equals: petition.id },
+          },
+        })
+
+        return {
+          success: true,
+          collection,
+          doc: { ...petition, signatureCount: totalDocs },
         }
       }
     }
