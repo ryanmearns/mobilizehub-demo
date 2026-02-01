@@ -51,7 +51,7 @@ export function Navbar(props: Setting) {
             {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
 
-          <NavigationMenu viewport={false} className="hidden font-semibold md:flex">
+          <NavigationMenu viewport={false} className="hidden font-semibold md:flex gap-2">
             <NavigationMenuList>
               {props.navItems?.map((item, index) => (
                 <NavigationMenuItem key={index}>
