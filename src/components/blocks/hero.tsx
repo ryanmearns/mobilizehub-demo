@@ -6,16 +6,16 @@ import { Button } from '../ui/button'
 export function HeroBlock({ headline, subheadline, image, buttons }: HeroBlockType) {
   return (
     <section className="bg-muted">
-      <div className="mx-auto max-w-7xl px-4 py-8 md:px-12 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-          <div className="flex flex-col gap-4 md:gap-6 self-center py-0 md:py-12">
-            <h1 className="text-primary text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+      <div className="mx-auto max-w-7xl px-4 py-8 lg:px-12 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+          <div className="flex flex-col gap-4 lg:gap-6 self-center py-0 lg:py-12">
+            <h1 className="text-primary text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               {headline}
             </h1>
-            <p className="text-muted-foreground text-base sm:text-lg md:text-xl">{subheadline}</p>
+            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl">{subheadline}</p>
 
             {buttons && buttons.length > 0 && (
-              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
+              <div className="mt-4 lg:mt-6 flex flex-wrap gap-2 lg:gap-3">
                 {buttons?.map((button, index) => {
                   const variant = button.style || 'default'
                   return (
