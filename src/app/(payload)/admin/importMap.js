@@ -26,6 +26,11 @@ import { SendBroadcastModal as SendBroadcastModal_ddfb106744f74e4f8b6aa32b3176ce
 import { SendTestBroadcastDrawer as SendTestBroadcastDrawer_ddfb106744f74e4f8b6aa32b3176cef6 } from '@mobilizehub/payload-plugin/client'
 import { EmailActivityField as EmailActivityField_ec282106275880eef4ed927ce0051fc7 } from '@mobilizehub/payload-plugin/rsc'
 import { EmailPreviewField as EmailPreviewField_ddfb106744f74e4f8b6aa32b3176cef6 } from '@mobilizehub/payload-plugin/client'
+import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
@@ -58,6 +63,11 @@ export const importMap = {
   "@mobilizehub/payload-plugin/client#SendTestBroadcastDrawer": SendTestBroadcastDrawer_ddfb106744f74e4f8b6aa32b3176cef6,
   "@mobilizehub/payload-plugin/rsc#EmailActivityField": EmailActivityField_ec282106275880eef4ed927ce0051fc7,
   "@mobilizehub/payload-plugin/client#EmailPreviewField": EmailPreviewField_ddfb106744f74e4f8b6aa32b3176cef6,
+  "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }

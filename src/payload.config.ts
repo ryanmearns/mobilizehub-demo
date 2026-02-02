@@ -7,13 +7,14 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { resendAdapter } from '@payloadcms/email-resend'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { Media } from './collections/Media'
 import { Users } from './collections/Users'
-import { migrations } from './migrations'
-import { mobilizehub } from './mobilizehub.config'
-import { seed } from './lib/seed'
 import { Settings } from './globals/settings'
 import { CONSTS } from './lib/consts'
+import { seed } from './lib/seed'
+import { migrations } from './migrations'
+import { mobilizehub } from './mobilizehub.config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -63,6 +64,10 @@ export default buildConfig({
   }),
   plugins: [
     mobilizehub,
+    seoPlugin({
+      collections: ['pages', 'forms', 'petitions'],
+      uploadsCollection: 'media',
+    }),
     s3Storage({
       collections: {
         media: true,
