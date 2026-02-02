@@ -64,10 +64,6 @@ export default buildConfig({
   }),
   plugins: [
     mobilizehub,
-    seoPlugin({
-      collections: ['pages', 'forms', 'petitions'],
-      uploadsCollection: 'media',
-    }),
     s3Storage({
       collections: {
         media: true,
@@ -82,6 +78,10 @@ export default buildConfig({
         endpoint: process.env.S3_ENDPOINT,
         forcePathStyle: true,
       },
+    }),
+    seoPlugin({
+      collections: [],
+      uploadsCollection: 'media',
     }),
   ],
 })

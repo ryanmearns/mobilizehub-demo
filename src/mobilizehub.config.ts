@@ -1,6 +1,13 @@
+import { renderEmailTemplate } from '@/lib/render-email-template'
 import { mobilizehubPlugin } from '@mobilizehub/payload-plugin'
 import { resendAdapter } from '@mobilizehub/payload-plugin/adapters'
-import { renderEmailTemplate } from '@/lib/render-email-template'
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields'
 import { LinkField } from './fields/link'
 
 export const mobilizehub = mobilizehubPlugin({
@@ -10,7 +17,108 @@ export const mobilizehub = mobilizehubPlugin({
     emailQueueName: 'email-send',
     taskSchedule: '* * * * *', // every 1 minute
   },
+  formsOverrides: {
+    fields: ({ defaultFields }) => {
+      const tabsField = defaultFields.find((field) => field.type === 'tabs')
+      const existingTabs = tabsField && 'tabs' in tabsField ? tabsField.tabs : []
+
+      return [
+        ...defaultFields.filter((field) => field.type !== 'tabs'),
+        {
+          type: 'tabs',
+          tabs: [
+            ...existingTabs,
+            {
+              label: 'SEO',
+              fields: [
+                {
+                  type: 'group',
+                  label: 'SEO',
+                  fields: [
+                    OverviewField({}),
+                    MetaTitleField({}),
+                    MetaDescriptionField({}),
+                    MetaImageField({
+                      relationTo: 'media',
+                    }),
+                    PreviewField({}),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]
+    },
+  },
+  petitionsOverrides: {
+    fields: ({ defaultFields }) => {
+      const tabsField = defaultFields.find((field) => field.type === 'tabs')
+      const existingTabs = tabsField && 'tabs' in tabsField ? tabsField.tabs : []
+
+      return [
+        ...defaultFields.filter((field) => field.type !== 'tabs'),
+        {
+          type: 'tabs',
+          tabs: [
+            ...existingTabs,
+            {
+              label: 'SEO',
+              fields: [
+                {
+                  type: 'group',
+                  label: 'SEO',
+                  fields: [
+                    OverviewField({}),
+                    MetaTitleField({}),
+                    MetaDescriptionField({}),
+                    MetaImageField({
+                      relationTo: 'media',
+                    }),
+                    PreviewField({}),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]
+    },
+  },
   pagesOverrides: {
+    fields: ({ defaultFields }) => {
+      const tabsField = defaultFields.find((field) => field.type === 'tabs')
+      const existingTabs = tabsField && 'tabs' in tabsField ? tabsField.tabs : []
+
+      return [
+        ...defaultFields.filter((field) => field.type !== 'tabs'),
+        {
+          type: 'tabs',
+          tabs: [
+            ...existingTabs,
+            {
+              label: 'SEO',
+              fields: [
+                {
+                  type: 'group',
+                  label: 'SEO',
+                  fields: [
+                    OverviewField({}),
+                    MetaTitleField({}),
+                    MetaDescriptionField({}),
+                    MetaImageField({
+                      relationTo: 'media',
+                    }),
+                    PreviewField({}),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]
+    },
+
     blocks: ({ defaultBlocks }) => [
       ...defaultBlocks,
       {

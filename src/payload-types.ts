@@ -696,14 +696,12 @@ export interface Form {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-  };
+  title?: string | null;
+  description?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -730,14 +728,12 @@ export interface Page {
         | LogosBlock
       )[]
     | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-  };
+  title?: string | null;
+  description?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -994,14 +990,12 @@ export interface Petition {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-  };
+  title?: string | null;
+  description?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1644,13 +1638,9 @@ export interface PagesSelect<T extends boolean = true> {
         Stats?: T | StatsBlockSelect<T>;
         Logos?: T | LogosBlockSelect<T>;
       };
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
+  title?: T;
+  description?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1961,13 +1951,9 @@ export interface FormsSelect<T extends boolean = true> {
         content?: T;
       };
   formSubmissions?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
+  title?: T;
+  description?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2108,13 +2094,9 @@ export interface PetitionsSelect<T extends boolean = true> {
         content?: T;
       };
   petitionSignatures?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
+  title?: T;
+  description?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
